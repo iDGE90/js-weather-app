@@ -10,6 +10,8 @@ Serve the application on development server with hot reloading
 
 ### Build Application
 
+After building the application, the built version will be placed in the dist directory in project root.
+
 Build the application for development
 
 `npm run build`
