@@ -8,8 +8,8 @@ const srcPath = path.join(__dirname, 'src');
 module.exports = {
 
   entry: [
-    './src/app.js',
-    './src/styles.scss',
+    './src/js/app.js',
+    './src/styles/app.scss',
   ],
 
   output: {
@@ -31,6 +31,7 @@ module.exports = {
     rules: [
       {
         test: /\.(css|sass|scss)$/,
+        exclude: /node_modules/,
         use: [
           MiniCssExtractPlugin.loader,
           {
@@ -57,6 +58,4 @@ module.exports = {
     }),
   ],
 
-  mode: 'production'
-  
 };
