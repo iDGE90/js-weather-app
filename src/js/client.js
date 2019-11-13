@@ -1,3 +1,7 @@
+const BASE_URI = 'https://api.openweathermap.org/data/2.5/';
+const APP_KEY = 'a83509480d3c4dbd72473b52e52c59ab';
+const UNITS = 'metric';
+
 export function request(obj) {
   return new Promise((resolve, reject) => {
     let xhr = new XMLHttpRequest();
@@ -22,4 +26,12 @@ export function request(obj) {
 
     xhr.send(obj.body);
   });
+}
+
+export function getLocationsUrl(lat = 41.03, lon = 21.34, cnt = 25) {
+  return BASE_URI + `find?lat=${lat}&lon=${lon}&cnt=${cnt}${getKeyAndUnits()}`;
+}
+
+function getKeyAndUnits() {
+  return `&appid=${APP_KEY}&units=${UNITS}`;
 }
