@@ -17,6 +17,10 @@ module.exports = {
     filename: '[name].js'
   },
 
+  optimization: {
+    // minimize: false
+  },
+
   // devtool: 'inline-source-map',
 
   devServer: {
@@ -29,6 +33,15 @@ module.exports = {
 
   module: {
     rules: [
+      {
+        test: /\.js$/,
+        exclude: /node_modules/,
+        use: [
+          {
+            loader: 'babel-loader'
+          }
+        ],
+      },
       {
         test: /\.(css|sass|scss)$/,
         exclude: /node_modules/,
