@@ -28,10 +28,12 @@ export function request(obj) {
   });
 }
 
+// Get url for location around Bitola
 export function getLocationsUrl(lat = 41.03, lon = 21.34, cnt = 25) {
   return BASE_URI + `find?lat=${lat}&lon=${lon}&cnt=${cnt}${getKeyAndUnits()}`;
 }
 
+// Get app key and units
 function getKeyAndUnits() {
   return `&appid=${APP_KEY}&units=${UNITS}`;
 }
