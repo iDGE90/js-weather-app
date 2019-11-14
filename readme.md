@@ -1,3 +1,7 @@
+# Weather
+
+Weather is javascript application that allows you to search for weather information using Open Weather API.
+
 ### Install Dependencies
 
 `npm install`
