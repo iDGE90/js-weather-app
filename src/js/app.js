@@ -1,11 +1,8 @@
-import {request, getLocationsUrl} from './client';
-import {renderLocations} from "./renderer";
+import {navigation} from './nav';
+import {fetchLocationsAndRender} from "./resources";
 
-let locations = [];
+// Handle navigation
+navigation();
 
-request({url: getLocationsUrl()}).then(res => {
-  if (res.list) {
-    locations = res.list;
-    renderLocations(locations);
-  }
-});
+// Fetch Locations
+fetchLocationsAndRender();

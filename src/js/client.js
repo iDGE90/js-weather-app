@@ -15,22 +15,25 @@ export function request(obj) {
     }
 
     xhr.onload = () => {
-      if (xhr.status >= 200 && xhr.status < 300) {
-        resolve(JSON.parse(xhr.response));
-      } else {
-        reject(JSON.parse(xhr.statusText));
-      }
+      xhr.status >= 200 && xhr.status < 300
+        ? resolve(JSON.parse(xhr.response))
+        : reject(JSON.parse(xhr.response));
     };
 
-    xhr.onerror = () => reject(JSON.parse(xhr.statusText));
+    xhr.onerror = () => reject(xhr.response);
 
     xhr.send(obj.body);
   });
 }
 
-// Get url for location around Bitola
+// Get url for locations around Bitola
 export function getLocationsUrl(lat = 41.03, lon = 21.34, cnt = 25) {
   return BASE_URI + `find?lat=${lat}&lon=${lon}&cnt=${cnt}${getKeyAndUnits()}`;
+}
+
+// Get url for locations around Bitola
+export function getSearchLocationUrl(q) {
+  return BASE_URI + `weather?q=${q}${getKeyAndUnits()}`;
 }
 
 // Get app key and units

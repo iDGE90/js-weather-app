@@ -2,19 +2,24 @@
 <html>
 <head>
   <meta charset="UTF-8">
-  <title>Application</title>
+  <title>Weather</title>
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
 </head>
 <body>
 <header class="mb-5 px-3">
   <div class="max-w-4xl m-auto py-3 border-b flex justify-between items-center">
-    <a href="#" class="text-blue-500 hover:text-blue-800">Home</a>
+    <a href="/" class="text-blue-500 hover:text-blue-800">Home</a>
 
-    <input type="text" class="input" placeholder="Search Location">
+    <input id="nav_search" type="text" class="input" placeholder="Search Location">
   </div>
 </header>
 
 <section class="px-3">
-  <div id="content" class="max-w-4xl m-auto"></div>
+  <div class="max-w-4xl m-auto">
+    <div id="content_title" class="text-center text-sm pb-6"></div>
+    <div id="content" class="overflow-x-auto"></div>
+  </div>
 </section>
 </body>
 </html>
