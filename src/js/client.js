@@ -35,12 +35,17 @@ export function getLocationsUrl(lat = 41.03, lon = 21.34, cnt = 25) {
 
 // Get url for locations around Bitola
 export function getSearchLocationUrl(q) {
-  return BASE_URI + `weather?q=${q}${getKeyAndUnits()}`;
+  return BASE_URI + `find?q=${q}&type=like${getKeyAndUnits()}`;
 }
 
 // Get url for location by id
 export function getLocationByIdUrl(id) {
   return BASE_URI + `weather?id=${id}${getKeyAndUnits()}`;
+}
+
+// Get forecast url for locaton by id
+export function getForecastUrl(id) {
+  return BASE_URI + `forecast?id=${id}${getKeyAndUnits()}`;
 }
 
 // Get url for weather icon

@@ -9,9 +9,9 @@ export function renderLocations(locations = []) {
   renderContentTitle('Showing weather information for locations around Bitola.');
 }
 
-export function renderSearchResult(location) {
-  renderTable([location]);
-  renderContentTitle('Showing search result.');
+export function renderSearchResult(locations) {
+  renderTable(locations);
+  renderContentTitle(locations.length > 0 ? `We found ${locations.length} locations.` : `We did't find any locations.`);
 }
 
 export function renderSingleLocation(location) {
@@ -38,13 +38,13 @@ function renderTable(locations = []) {
   locations.forEach((location) => {
     tableRows +=
       `<tr class="text-xs bg-white odd:bg-gray-100">
-        <td class="px-3 py-1">
+        <td class="px-3 py-2">
           <a href="/location/${location.id}" class="text-blue-600 hover:text-blue-700">${location.name} (${location.sys.country})</a>
         </td>
-        <td class="px-3 py-1">${location.weather[0].main}</td>
-        <td class="px-3 py-1">${location.wind.speed} km/h</td>
-        <td class="px-3 py-1">${location.main.humidity} %</td>
-        <td class="px-3 py-1 text-right">
+        <td class="px-3 py-2">${location.weather[0].main}</td>
+        <td class="px-3 py-2">${location.wind.speed} km/h</td>
+        <td class="px-3 py-2">${location.main.humidity} %</td>
+        <td class="px-3 py-2 text-right">
           <span class="font-bold">${location.main.temp}</span>
           <span> &deg;C</span>
         </td>
@@ -80,33 +80,94 @@ function renderContentTitle(title = null) {
 function renderLocation(location = null) {
   contentEl.innerHTML =
     `<div>
-      <div>${location.name} (${location.sys.country})</div>
-      <div>Temperature: ${location.main.temp} &deg;C</div>
-      <div>Temperature Min: ${location.main.temp_min} &deg;C</div>
-      <div>Temperature Max: ${location.main.temp_max} &deg;C</div>
-      <div>Humidity: ${location.main.humidity} %</div>
-      <div>Pressure: ${location.main.pressure} hPa</div>
-      <div>Weather: ${location.weather[0].main}</div>
-      <div>
-        <img src="${getImageUrl(location.weather[0].icon, true)}" alt="${location.weather[0].main}">
+      <div class="text-center text-3xl">${location.name} (${location.sys.country})</div>
+      <div class="text-center text-xs mb-5">${getDate(location.dt)}h -  (GMT ${getGmt(location.timezone)})</div>
+
+      <div class="block sm:flex">
+        <div class="w-full sm:w-1/3">
+          <div class="text-center border-b">
+            <img class="-my-4 mx-auto" src="${getImageUrl(location.weather[0].icon, true)}" alt="${location.weather[0].main}" title="${location.weather[0].main}">
+            <div class="pb-3">
+              <span class="text-4xl font-bold">${location.main.temp}</span>
+              <span class="text">&deg;C</span>
+            </div>
+          </div>
+          <div class="flex flex-row border-b">
+            <div class="flex-1 text-center py-2 border-r">
+              <div class="text-gray-600 text-xs uppercase" style="font-size: 0.65rem;">min</div>
+              <div>
+                <span class="font-medium">${location.main.temp_min}</span>
+                <span class="text-xs"> &deg;C</span>
+              </div>
+            </div>
+            <div class="flex-1 text-center py-2">
+              <div class="text-gray-600 text-xs uppercase" style="font-size: 0.65rem;">max</div>
+              <div>
+                <span class="font-medium">${location.main.temp_max}</span>
+                <span class="text-xs"> &deg;C</span>
+              </div>
+            </div>
+          </div>
+          <div class="border-b p-2 flex justify-between items-center">
+            <div class="text-gray-600 text-xs uppercase">Humidity</div>
+            <div class="text-sm">
+              <span class="font-medium">${location.main.humidity}</span>
+              <span class="text-xs text-gray-600"> %</span>
+            </div>
+          </div>
+          <div class="border-b p-2 flex justify-between items-center">
+            <div class="text-gray-600 text-xs uppercase">Pressure</div>
+            <div class="text-sm">
+              <span class="font-medium">${location.main.pressure}</span>
+              <span class="text-xs text-gray-600"> hPa</span>
+            </div>
+          </div>
+          <div class="border-b p-2 flex justify-between items-center">
+            <div class="text-gray-600 text-xs uppercase">Wind</div>
+            <div class="text-sm">
+              <div>
+                <span class="font-medium">${location.wind.speed}</span>
+                <span class="text-xs text-gray-600"> km/h</span>
+              </div>
+              <div class="text-right">
+                <span class="font-medium">${location.wind.deg}</span>
+                <span class="text-xs text-gray-600"> &deg;</span>
+              </div>
+            </div>
+          </div>
+          <div class="border-b p-2 flex justify-between items-center">
+            <div class="text-gray-600 text-xs uppercase">Sunrise</div>
+            <div class="text-sm">
+              <span class="font-medium">${getDate(location.sys.sunrise)}</span>
+              <span class="text-xs text-gray-600"> h</span>
+            </div>
+          </div>
+          <div class="border-b p-2 flex justify-between items-center">
+            <div class="text-gray-600 text-xs uppercase">Sunset</div>
+            <div class="text-sm">
+              <span class="font-medium">${getDate(location.sys.sunset)}</span>
+              <span class="text-xs text-gray-600"> h</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="w-full sm:w-2/3 pl-10">
+          forecast
+        </div>
       </div>
-      <div>Timezone: ${location.timezone}</div>
-      <div>Wind Speed: ${location.wind.speed} km/h</div>
-      <div>Wind Degrees: ${location.wind.deg} deg</div>
-      <div>Sunrise: ${getDate(location.sys.sunrise)}</div>
-      <div>Sunset: ${getDate(location.sys.sunset)}</div>
     </div>`;
 }
 
 function getDate(timestamp) {
-  var date = new Date(timestamp * 1000);
-// Hours part from the timestamp
-  var hours = "0" + date.getHours();
-// Minutes part from the timestamp
-  var minutes = "0" + date.getMinutes();
-// Seconds part from the timestamp
-  var seconds = "0" + date.getSeconds();
+  const date = new Date(timestamp * 1000);  
+  const hours = '0' + date.getHours();  
+  const minutes = '0' + date.getMinutes();  
+  const seconds = '0' + date.getSeconds();
+  
+  // return hours.substr(-2) + ':' + minutes.substr(-2) + ':' + seconds.substr(-2);
+  return hours.substr(-2) + ':' + minutes.substr(-2);
+}
 
-// Will display time in 10:30:23 format
-  return hours.substr(-2) + ':' + minutes.substr(-2) + ':' + seconds.substr(-2);
+function getGmt(seconds) {
+  return seconds / 3600;
 }

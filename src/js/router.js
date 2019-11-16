@@ -1,6 +1,11 @@
-// Initialize routing and add event listeners to anchors
-import {fetchLocationAndRender, fetchLocationsAndRender, fetchLocationResultAndRender} from "./resources";
+import {
+  fetchLocationAndRender, 
+  fetchLocationsAndRender, 
+  fetchLocationResultAndRender,
+  fetchLocationForecastAndRender
+} from "./resources";
 
+// Initialize routing and add event listeners to anchors
 export function initRouting() {
   window.history.pushState = ( f => function pushState(){
     const ret = f.apply(this, arguments);
@@ -42,6 +47,7 @@ export function addListenersOnAnchors(anchors) {
   }
 }
 
+// Route detection
 export function getRouteAndAct() {
   const uri = (window.location.pathname).substr(1);
   const splitUri = uri.split('/');
@@ -58,6 +64,7 @@ export function getRouteAndAct() {
   // locations/:id
   if (splitUri[0] === 'location' && splitUri[1]) {
     fetchLocationAndRender(splitUri[1]);
+    fetchLocationForecastAndRender(splitUri[1]);
     return;
   }
 
@@ -76,6 +83,7 @@ export function getRouteAndAct() {
   window.history.pushState(null, null, '/');
 }
 
+// Get query param from url 
 export function getUrlParameter(name) {
   name = name.replace(/[\[]/, '\\[').replace(/[\]]/, '\\]');
 
