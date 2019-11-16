@@ -10,7 +10,7 @@ export function initNavigation() {
     if (navSearchTimeout) clearTimeout(navSearchTimeout);
 
     navSearchTimeout = setTimeout(() => {
-      value ? fetchLocationResultAndRender(value) : fetchLocationsAndRender();
+      window.history.pushState(null, null, value ? `/search?q=${value}` : '/');
     }, 750);
   });
 }

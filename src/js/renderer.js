@@ -6,7 +6,7 @@ const contentTitleEl = document.getElementById('content_title');
 
 export function renderLocations(locations = []) {
   renderTable(locations);
-  renderContentTitle('Showing current temperature for locations around Bitola.');
+  renderContentTitle('Showing weather information for locations around Bitola.');
 }
 
 export function renderSearchResult(location) {

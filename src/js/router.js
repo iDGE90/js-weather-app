@@ -1,5 +1,5 @@
 // Initialize routing and add event listeners to anchors
-import {fetchLocationAndRender, fetchLocationsAndRender} from "./resources";
+import {fetchLocationAndRender, fetchLocationsAndRender, fetchLocationResultAndRender} from "./resources";
 
 export function initRouting() {
   window.history.pushState = ( f => function pushState(){
@@ -58,5 +58,29 @@ export function getRouteAndAct() {
   // locations/:id
   if (splitUri[0] === 'location' && splitUri[1]) {
     fetchLocationAndRender(splitUri[1]);
+    return;
   }
+
+  // search
+  if (splitUri[0] === 'search') {
+    const q = getUrlParameter('q');
+
+    if (q) {
+      fetchLocationResultAndRender(q);
+    }
+
+    
+    return;
+  }
+
+  window.history.pushState(null, null, '/');
+}
+
+export function getUrlParameter(name) {
+  name = name.replace(/[\[]/, '\\[').replace(/[\]]/, '\\]');
+
+  let regex = new RegExp('[\\?&]' + name + '=([^&#]*)');
+  let results = regex.exec(location.search);
+
+  return results === null ? '' : decodeURIComponent(results[1].replace(/\+/g, ' '));
 }
