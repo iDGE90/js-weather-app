@@ -1,8 +1,11 @@
-import {navigation} from './nav';
-import {fetchLocationsAndRender} from "./resources";
+import {initNavigation} from './nav';
+import {getRouteAndAct, initRouting} from "./router";
 
-// Handle navigation
-navigation();
+// Init Routing
+initRouting();
 
-// Fetch Locations
-fetchLocationsAndRender();
+// Init initNavigation
+initNavigation();
+
+// Get route and render
+getRouteAndAct();

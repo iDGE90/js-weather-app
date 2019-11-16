@@ -1,6 +1,7 @@
 const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
+const CopyPlugin = require('copy-webpack-plugin');
 
 const distPath = path.join(__dirname, 'dist');
 const srcPath = path.join(__dirname, 'src');
@@ -14,7 +15,8 @@ module.exports = {
 
   output: {
     path: distPath,
-    filename: '[name].js'
+    filename: '[name].js',
+    publicPath: process.env.WDS === 'true' ? '/' : ''
   },
 
   optimization: {
@@ -28,7 +30,8 @@ module.exports = {
     watchContentBase: true,
     hot: true,
     inline: true,
-    stats: 'errors-only'
+    stats: 'errors-only',
+    historyApiFallback: true
   },
 
   module: {
@@ -69,6 +72,10 @@ module.exports = {
     new MiniCssExtractPlugin({
       filename: "[name].css",
     }),
+    new CopyPlugin([
+      { from: './src/favicon.ico', to: '' },
+      { from: './src/.htaccess', to: '' }
+    ]),
   ],
 
 };

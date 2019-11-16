@@ -1,7 +1,7 @@
 import {fetchLocationsAndRender, fetchLocationResultAndRender} from './resources';
 
 // Handle navigation search
-export function navigation() {
+export function initNavigation() {
   let navSearchTimeout;
 
   document.getElementById('nav_search').addEventListener('input', ($event) => {
