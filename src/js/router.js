@@ -37,10 +37,20 @@ export function initRouting() {
 // Add event listeners to anchor and don't redirect (refresh page)
 export function addListenersOnAnchors(anchors) {
   for (let anchor of anchors) {
+    if (anchor.target) continue;
+
     anchor.addEventListener('click', function($event) {
       $event.preventDefault();
 
-      const href = $event.target.getAttribute('href');
+      let href = '/';
+
+      if ($event.target.nodeName !== 'A') {
+        const anchor = $event.target.closest('a');
+
+        if (anchor) href = anchor.getAttribute('href');
+      } else {
+        href = $event.target.getAttribute('href');
+      }
 
       window.history.pushState(null, null, href);
     });

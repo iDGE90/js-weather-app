@@ -39,13 +39,13 @@ function renderTable(locations = []) {
     tableRows +=
       `<tr class="text-xs bg-white odd:bg-gray-100">
         <td class="px-3 py-2">
-          <a href="/location/${location.id}" class="text-blue-600 hover:text-blue-700">${location.name} (${location.sys.country})</a>
+          <a href="/location/${location.id}" class="anchor">${location.name} (${location.sys.country})</a>
         </td>
         <td class="px-3 py-2">${location.weather[0].main}</td>
         <td class="px-3 py-2">${location.wind.speed} km/h</td>
         <td class="px-3 py-2">${location.main.humidity} %</td>
         <td class="px-3 py-2 text-right">
-          <span class="font-bold">${location.main.temp}</span>
+          <span class="font-bold">${roundDegrees(location.main.temp)}</span>
           <span> &deg;C</span>
         </td>
       </tr>`;
@@ -81,14 +81,14 @@ function renderLocation(location = null) {
   contentEl.innerHTML =
     `<div>
       <div class="text-center text-3xl">${location.name} (${location.sys.country})</div>
-      <div class="text-center text-xs mb-5">${getDate(location.dt)}h -  (GMT ${getGmt(location.timezone)})</div>
+      <div class="text-center text-xs mb-5 sm:mb-10">${getDate(location.dt)}h -  (GMT ${getGmt(location.timezone)})</div>
 
       <div class="block sm:flex">
         <div class="w-full sm:w-1/3">
           <div class="text-center border-b">
             <img class="-my-4 mx-auto" src="${getImageUrl(location.weather[0].icon, true)}" alt="${location.weather[0].main}" title="${location.weather[0].main}">
             <div class="pb-3">
-              <span class="text-4xl font-bold">${location.main.temp}</span>
+              <span class="text-4xl font-bold">${roundDegrees(location.main.temp)}</span>
               <span class="text">&deg;C</span>
             </div>
           </div>
@@ -96,14 +96,14 @@ function renderLocation(location = null) {
             <div class="flex-1 text-center py-2 border-r">
               <div class="text-gray-600 text-xs uppercase" style="font-size: 0.65rem;">min</div>
               <div>
-                <span class="font-medium">${location.main.temp_min}</span>
+                <span class="font-medium">${roundDegrees(location.main.temp_min)}</span>
                 <span class="text-xs"> &deg;C</span>
               </div>
             </div>
             <div class="flex-1 text-center py-2">
               <div class="text-gray-600 text-xs uppercase" style="font-size: 0.65rem;">max</div>
               <div>
-                <span class="font-medium">${location.main.temp_max}</span>
+                <span class="font-medium">${roundDegrees(location.main.temp_max)}</span>
                 <span class="text-xs"> &deg;C</span>
               </div>
             </div>
@@ -151,8 +151,8 @@ function renderLocation(location = null) {
           </div>
         </div>
 
-        <div class="w-full sm:w-2/3 pl-10">
-          forecast
+        <div class="w-full sm:w-2/3 pl-10 ">
+          <div class="text-center text-gray-600 text-xs uppercase">forecast</div>
         </div>
       </div>
     </div>`;
@@ -170,4 +170,8 @@ function getDate(timestamp) {
 
 function getGmt(seconds) {
   return seconds / 3600;
+}
+
+function roundDegrees(number) {
+  return Math.round(number * 10) / 10;
 }

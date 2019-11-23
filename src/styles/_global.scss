@@ -1,13 +1,28 @@
 body {
-    min-height: 100vh;
-    display: flex;
-    flex-direction: column;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
 }
 
 #main {
-    flex: 1;
+  flex: 1;
 }
 
 footer {
-    font-size: 0.65rem;
+  font-size: 0.65rem;
+}
+
+#home-link {
+  img {
+    width: 24px;
+    height: 24px;
+  }
+}
+
+.anchor {
+  @apply text-blue-600;
+
+  &:hover {
+    @apply text-blue-700 underline;
+  }
 }

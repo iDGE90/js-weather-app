@@ -6,12 +6,15 @@
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-  <link rel="icon" type="image/png" href="favicon.ico?v=1" sizes="32x32">
+  <link rel="icon" type="image/ico" href="favicon.ico?v=1" sizes="32x32">
 </head>
 <body>
 <header class="mb-5 px-3">
   <div class="max-w-4xl m-auto py-3 border-b flex justify-between items-center">
-    <a href="/" class="text-blue-600 hover:text-blue-700">Weather</a>
+    <a id="home-link" href="/" class="text-blue-600 hover:text-blue-700 flex align-center">
+      <img src="/favicon.ico?v=1" alt="Logo">
+      <span class="ml-2 font-medium">Weather</span>
+    </a>
 
     <input id="nav_search" type="text" class="input" placeholder="Search Location">
   </div>
@@ -20,14 +23,13 @@
 <section id="main" class="px-3">
   <div class="max-w-4xl m-auto pb-6">
     <div id="content_title" class="text-center text-sm pb-6"></div>
-    <!-- <div id="content" class="overflow-x-auto"></div> -->
-    <div id="content"></div>
+     <div id="content" class="overflow-x-auto"></div>
   </div>
 </section>
 
 <footer class="px-3">
   <div class="max-w-4xl m-auto">
-    <div class="text-center py-2">Weather application uses Open Weather API.</div>
+    <div class="text-center py-2">Weather application uses <a href="https://openweathermap.org/" target="_blank" class="anchor">Open Weather API</a>.</div>
   </div>
 </footer>
 </body>
