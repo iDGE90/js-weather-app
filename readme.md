@@ -2,6 +2,8 @@
 
 Weather is javascript application that allows you to search for weather information using Open Weather API.
 
+[Demo](https://js-gmlsst.stackblitz.io/)
+
 ### Install Dependencies
 
 `npm install`
