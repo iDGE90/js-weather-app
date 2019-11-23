@@ -1,9 +1,11 @@
+const navSearchEl = document.getElementById('nav_search');
+
 // Handle navigation search
 export function initNavigation() {
   let navSearchTimeout;
 
   // Handle search on input event, wait a bit for more characters being added before redirecting to search page
-  document.getElementById('nav_search').addEventListener('input', ($event) => {
+  navSearchEl.addEventListener('input', ($event) => {
     const value = $event.target.value;
 
     if (navSearchTimeout) clearTimeout(navSearchTimeout);
@@ -14,7 +16,7 @@ export function initNavigation() {
   });
 
   // Handle search if key Enter is pressed and redirect to search page
-  document.getElementById('nav_search').addEventListener('keypress', ($event) => {
+  navSearchEl.addEventListener('keypress', ($event) => {
     const value = $event.target.value;
     let key = $event.which || $event.keyCode;
 
@@ -24,4 +26,9 @@ export function initNavigation() {
       window.history.pushState(null, null, value ? `/search?q=${value}` : '/');
     }
   });
+}
+
+// If search page reload fill search input
+export function checkSearchInputValue(q) {
+  if (q && !navSearchEl.value) navSearchEl.value = q;
 }

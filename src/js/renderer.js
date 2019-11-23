@@ -4,28 +4,32 @@ import {getImageUrl} from "./client";
 const contentEl = document.getElementById('content');
 const contentTitleEl = document.getElementById('content_title');
 
+// Render home page with list of locations
 export function renderLocations(locations = []) {
   renderTable(locations);
   renderContentTitle('Showing weather information for locations around Bitola.');
 }
 
+// Render search page with list of search results
 export function renderSearchResult(locations) {
   renderTable(locations);
   renderContentTitle(locations.length > 0 ? `We found ${locations.length} locations.` : `We did't find any locations.`);
 }
 
+// Render location page for single location
 export function renderSingleLocation(location) {
   renderContentTitle();
   renderLocation(location);
 }
 
+// Render error message as content title
 export function renderError(error, q = '') {
   switch(error.cod) {
     case '404':
       renderContentTitle(`No location result for: ${q}.`);
       break;
     default:
-      renderContentTitle(`Error: ${error.message}.`);
+      renderContentTitle(`Error: ${error.message}.`, true);
   }
 
   renderTable();
@@ -71,9 +75,10 @@ function renderTable(locations = []) {
 }
 
 // Render content title
-function renderContentTitle(title = null) {
+function renderContentTitle(title = null, error = false) {
   contentTitleEl.style.display = title ? null : 'none';
   contentTitleEl.innerText = title || '';
+  error ? contentTitleEl.classList.add('error') : contentTitleEl.classList.remove('error');
 }
 
 // Render location

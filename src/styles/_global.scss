@@ -19,6 +19,12 @@ footer {
   }
 }
 
+#content_title {
+  &.error {
+    @apply text-red-500 capitalize font-medium;
+  }
+}
+
 .anchor {
   @apply text-blue-600;
 

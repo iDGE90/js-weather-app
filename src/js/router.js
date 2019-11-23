@@ -4,6 +4,7 @@ import {
   fetchLocationResultAndRender,
   fetchLocationForecastAndRender
 } from "./resources";
+import {checkSearchInputValue} from "./nav";
 
 // Initialize routing and add event listeners to anchors
 export function initRouting() {
@@ -83,9 +84,9 @@ export function getRouteAndAct() {
     const q = getUrlParameter('q');
 
     if (q) {
+      checkSearchInputValue(q);
       fetchLocationResultAndRender(q);
     }
-
     
     return;
   }
