@@ -48,7 +48,7 @@ export function renderSingleLocationForecast(forecast = []) {
     dayF.forEach(hour => {
       day += hour
         ?
-        `<div class="flex-1 p-1 text-center flex flex-col forecast-hover">
+        `<div class="forecast-hover">
             <div class="mt-1 flex-1 text-xs hidden">
               <div class="text-xs">
                 <span class="font-medium">${hour.main.humidity}</span>
@@ -89,28 +89,28 @@ export function renderSingleLocationForecast(forecast = []) {
 
   forecastEl.innerHTML =
     `<div class="flex mb-1">
-      <div class="flex-1 p-1 text-center">
+      <div class="forecast-hour">
         <div class="text-xs border-b pb-1 text-gray-600">01:00 h</div>          
       </div>
-      <div class="flex-1 p-1 text-center">
+      <div class="forecast-hour">
         <div class="text-xs border-b pb-1 text-gray-600">04:00 h</div>          
       </div>
-      <div class="flex-1 p-1 text-center">
+      <div class="forecast-hour">
         <div class="text-xs border-b pb-1 text-gray-600">07:00 h</div>          
       </div>
-      <div class="flex-1 p-1 text-center">
+      <div class="forecast-hour">
         <div class="text-xs border-b pb-1 text-gray-600">10:00 h</div>          
       </div>
-      <div class="flex-1 p-1 text-center">
+      <div class="forecast-hour">
         <div class="text-xs border-b pb-1 text-gray-600">13:00 h</div>
       </div>
-      <div class="flex-1 p-1 text-center">
+      <div class="forecast-hour">
         <div class="text-xs border-b pb-1 text-gray-600">16:00 h</div>
       </div>
-      <div class="flex-1 p-1 text-center">
+      <div class="forecast-hour">
         <div class="text-xs border-b pb-1 text-gray-600">19:00 h</div>
       </div>
-      <div class="flex-1 p-1 text-center">
+      <div class="forecast-hour">
         <div class="text-xs border-b pb-1 text-gray-600">22:00 h</div>  
       </div>
     </div>` + all;
@@ -170,7 +170,7 @@ function renderLocation(location = null) {
       <div class="text-center text-xs mb-5 sm:mb-10">${getDate(location.dt)}h -  (GMT ${getGmt(location.timezone)})</div>
 
       <div class="block sm:flex">
-        <div class="w-full sm:w-1/3">
+        <div class="w-full sm:w-1/3 mb-10 sm:mb-0">
           <div class="text-center border-b">
             <img class="-my-4 mx-auto" src="${getImageUrl(location.weather[0].icon, true)}" alt="${location.weather[0].main}" title="${location.weather[0].main}">
             <div class="pb-3">
@@ -237,8 +237,8 @@ function renderLocation(location = null) {
           </div>
         </div>
 
-        <div class="w-full sm:w-2/3 pl-10 ">
-          <div id="forecast"></div>
+        <div class="w-full sm:w-2/3 sm:pl-10 ">
+          <div id="forecast" class="overflow-x-auto"></div>
         </div>
       </div>
     </div>`;
