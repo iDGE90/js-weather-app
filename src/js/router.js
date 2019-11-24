@@ -1,8 +1,7 @@
 import {
   fetchLocationAndRender, 
   fetchLocationsAndRender, 
-  fetchLocationResultAndRender,
-  fetchLocationForecastAndRender
+  fetchLocationResultAndRender
 } from "./resources";
 import {checkSearchInputValue} from "./nav";
 
@@ -75,7 +74,6 @@ export function getRouteAndAct() {
   // locations/:id
   if (splitUri[0] === 'location' && splitUri[1]) {
     fetchLocationAndRender(splitUri[1]);
-    fetchLocationForecastAndRender(splitUri[1]);
     return;
   }
 

@@ -32,3 +32,32 @@ footer {
     @apply text-blue-700 underline;
   }
 }
+
+.forecast-hover {
+  @apply border border-transparent;
+
+  &:hover {
+    @apply border-gray-300;
+
+    .hidden {
+      @apply block;
+    }
+    .block {
+      @apply hidden;
+    }
+  }
+}
+
+#forecast {
+  div:last-child {
+    margin-bottom: 0;
+  }
+}
+
+.forecast-day {
+  @apply rounded-sm px-2 bg-gray-700 text-gray-100;
+  display: inline-block;
+  font-size: 0.65rem;
+  padding-top: 0.2rem;
+  padding-bottom: 0.2rem;
+}

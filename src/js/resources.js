@@ -1,5 +1,11 @@
 import {getLocationByIdUrl, getLocationsUrl, getSearchLocationUrl, request, getForecastUrl} from "./client";
-import {renderError, renderLocations, renderSearchResult, renderSingleLocation} from "./renderer";
+import {
+  renderError,
+  renderLocations,
+  renderSearchResult,
+  renderSingleLocation,
+  renderSingleLocationForecast
+} from "./renderer";
 
 export function fetchLocationsAndRender() {
   request({url: getLocationsUrl()}).then(res => {
@@ -17,16 +23,18 @@ export function fetchLocationResultAndRender(value) {
 
 export function fetchLocationAndRender(id) {
   request({url: getLocationByIdUrl(id)}).then(res => {
-    if (res) renderSingleLocation(res);
+    if (res) fetchLocationForecastAndRender(id, res);
   }).catch(error => {
     renderError(error, value);
   });
 }
 
-export function fetchLocationForecastAndRender(id) {
+export function fetchLocationForecastAndRender(id, location) {
   request({url: getForecastUrl(id)}).then(res => {
-    // if (res) renderSingleLocation(res);
-    console.log(res);
+    if (res) {
+      renderSingleLocation(location);
+      renderSingleLocationForecast(res.list);
+    }
   }).catch(error => {
     renderError(error, value);
   });
