@@ -42,11 +42,11 @@ export default class Renderer {
           ?
           `<div class="forecast-hover">
               <div class="mt-1 flex-1 text-xs hidden">
-                <div class="text-xs">
+                <div class="text-xs" title="Humidity">
                   <span class="font-medium">${hour.main.humidity}</span>
                   <span class="text-gray-600"> %</span>
                 </div>
-                <div class="text-xs">
+                <div class="text-xs" title="Pressure">
                   <span class="font-medium">${hour.main.pressure}</span>
                   <span class="text-gray-600"> hPa</span>
                 </div>
@@ -60,7 +60,7 @@ export default class Renderer {
                   <span class="text-xs text-gray-600">&deg;C</span>
                 </div>
                 
-                <div class="hidden">
+                <div class="hidden" title="Wind">
                   <span class="font-medium text-xs">${hour.wind.speed}</span>
                   <span class="text-xs text-gray-600"> km/h</span>
                 </div>
@@ -128,10 +128,10 @@ export default class Renderer {
   }
 
   // Render content title
-  private renderContentTitle(title = null, error = false): void {
+  private renderContentTitle(title: string = null, isError = false): void {
     this.contentTitleEl.style.display = title ? null : 'none';
     this.contentTitleEl.innerText = title || '';
-    error ? this.contentTitleEl.classList.add('error') : this.contentTitleEl.classList.remove('error');
+    isError ? this.contentTitleEl.classList.add('error') : this.contentTitleEl.classList.remove('error');
   }
 
   // Render table with locations
