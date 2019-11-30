@@ -9,7 +9,7 @@ const srcPath = path.join(__dirname, 'src');
 module.exports = {
 
   entry: [
-    './src/js/app.js',
+    './src/js/app.ts',
     './src/styles/app.scss',
   ],
 
@@ -37,7 +37,7 @@ module.exports = {
   module: {
     rules: [
       {
-        test: /\.js$/,
+        test: /\.ts$/,
         exclude: /node_modules/,
         use: [
           {
