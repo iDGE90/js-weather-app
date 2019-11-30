@@ -33,15 +33,15 @@ export default class Client {
   }
 
   getLocationsUrl(lat = 41.03, lon = 21.34, cnt = 25) {
-    return this.baseUri + `find?lat=${lat}&lon=${lon}&cnt=${cnt}${this.keyAndUnits}`;
+    return this.getUrl(`find?lat=${lat}&lon=${lon}&cnt=${cnt}`);
   }
 
   getLocationByIdUrl(id) {
-    return this.baseUri + `weather?id=${id}${this.keyAndUnits}`;
+    return this.getUrl(`weather?id=${id}`);
   }
   
   getForecastUrl(id) {
-    return this.baseUri + `forecast?id=${id}${this.keyAndUnits}`;
+    return this.getUrl(`forecast?id=${id}`);
   }
 
   getImageUrl(icon, double = false) {
@@ -49,9 +49,15 @@ export default class Client {
   }
 
   getSearchLocationUrl(q) {
-    return this.baseUri + `find?q=${q}&type=like${this.keyAndUnits}`;
+    return this.getUrl(`find?q=${q}&type=like`);
   }
 
+  // Get full url for request
+  getUrl(uri: string): string {
+    return this.baseUri + uri + this.keyAndUnits;
+  }
+
+  // Get application key and units (imperial/metric)
   get keyAndUnits(): string {
     return `&appid=${this.appKey}&units=${this.units}`;
   }

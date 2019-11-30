@@ -1,4 +1,5 @@
 import Resources from "./resources";
+import Utilities from "./utilities";
 
 export default class Router {
 
@@ -10,6 +11,7 @@ export default class Router {
     this.init();
   }
 
+  // Initialize routing and add event listeners to anchors
   private init(): void {
     window.history.pushState = (f => function pushState() {
       const ret = f.apply(this, arguments);
@@ -35,36 +37,12 @@ export default class Router {
 
     window.addEventListener('locationchange', this.getRouteAndAct.bind(this));
 
-    this.addListenersOnAnchors(document.getElementsByTagName('a'));
+    Utilities.addListenersOnAnchors(document.getElementsByTagName('a'));
 
     this.getRouteAndAct();
   }
 
-  // extract to new class
-  addListenersOnAnchors(anchors: HTMLCollectionOf<HTMLAnchorElement>): void {
-    for (let anchor of anchors) {
-      if (anchor.target) continue;
-
-      anchor.addEventListener('click', function ($event) {
-        $event.preventDefault();
-
-        const target = $event.target as HTMLElement;
-
-        let href = '/';
-
-        if (target.nodeName !== 'A') {
-          const anchor = target.closest('a');
-
-          if (anchor) href = anchor.getAttribute('href');
-        } else {
-          href = target.getAttribute('href');
-        }
-
-        window.history.pushState(null, null, href);
-      });
-    }
-  }
-
+  // Route detection
   private getRouteAndAct(): void {
     const uri = (window.location.pathname).substr(1);
     const splitUri = uri.split('/');
@@ -86,10 +64,10 @@ export default class Router {
 
     // search
     if (splitUri[0] === 'search') {
-      const q = this.getUrlParameter('q');
+      const q = Utilities.getUrlParameter('q');
 
       if (q) {
-        // checkSearchInputValue(q);
+        Utilities.checkSearchInputValue(q);
         this.resources.fetchLocationResultAndRender(q);
       }
 
@@ -97,15 +75,6 @@ export default class Router {
     }
 
     window.history.pushState(null, null, '/');
-  }
-
-  private getUrlParameter(name) {
-    name = name.replace(/[\[]/, '\\[').replace(/[\]]/, '\\]');
-  
-    let regex = new RegExp('[\\?&]' + name + '=([^&#]*)');
-    let results = regex.exec(location.search);
-  
-    return results === null ? '' : decodeURIComponent(results[1].replace(/\+/g, ' '));
   }
 
 }
