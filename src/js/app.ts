@@ -1,13 +1,14 @@
+import Router from "./router";
+import Nav from "./nav";
+
 class App {
 
-    name = 'Igor';
+    router: Router;
+    nav: Nav;
 
     constructor() {
-        console.log(this.hello());
-    }
-
-    hello(): string {
-        return 'Hello ' + this.name;
+        this.router = new Router();
+        this.nav = new Nav();
     }
 
 }

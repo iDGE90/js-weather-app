@@ -25,6 +25,11 @@ module.exports = {
 
   // devtool: 'inline-source-map',
 
+  resolve: {
+    enforceExtension: false,
+    extensions: ['.ts', '.js'],
+  },
+
   devServer: {
     contentBase: srcPath,
     watchContentBase: true,
