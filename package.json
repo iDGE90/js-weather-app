@@ -5,9 +5,9 @@
   "main": "index.js",
   "scripts": {
     "serve": "cross-env WDS=true webpack-dev-server",
-    "watch": "webpack --config webpack.config.js --watch",
-    "build": "webpack --config webpack.config.js",
-    "build:prod": "cross-env NODE_ENV=production webpack --config webpack.config.js --mode=production",
+    "watch": "webpack --watch",
+    "build": "webpack",
+    "build:prod": "cross-env NODE_ENV=production webpack --mode=production",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [],
