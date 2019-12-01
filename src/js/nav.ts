@@ -2,7 +2,7 @@ export default class Nav {
 
   static navSearchEl = document.getElementById('nav_search');
 
-  navSearchTimeout;
+  navSearchTimeout: any;
 
   constructor() {
     this.init();

@@ -14,11 +14,11 @@ export default class Utilities {
   }
 
   // Add event listeners to anchors and don't redirect (refresh page)
-  static addListenersOnAnchors(anchors: NodeListOf<HTMLAnchorElement>): void {
-    for (let anchor of anchors) {
+  static addListenersOnAnchors(anchors: HTMLCollectionOf<HTMLAnchorElement>): void {
+    for (let anchor of anchors as any) {
       if (anchor.target) continue;
 
-      anchor.addEventListener('click', function ($event) {
+      anchor.addEventListener('click', function ($event: Event) {
         $event.preventDefault();
 
         const target = $event.target as HTMLElement;

@@ -47,7 +47,7 @@ export default class Router {
     const uri = (window.location.pathname).substr(1);
     const splitUri = uri.split('/');
 
-    console.log('location changed!', uri, splitUri);
+    // console.log('location changed!', uri, splitUri);
     // TODO: simple regex to catch routes and render appropriate elements
 
     // /

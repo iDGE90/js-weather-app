@@ -3,6 +3,7 @@ import Utilities from "./utilities";
 import Location from "../models/location";
 import ForecastListItem from "../models/forecast-list-item";
 import AppError from "../models/app-error";
+import MultiLocation from "../models/multi-location";
 
 export default class Renderer {
 
@@ -109,7 +110,7 @@ export default class Renderer {
   }
 
   // Render search page with list of locations
-  renderSearchResult(locations): void {
+  renderSearchResult(locations: Array<Location>): void {
     this.renderTable(locations);
     this.renderContentTitle(locations.length > 0 ? `We found ${locations.length} locations.` : `We did't find any locations.`);
   }
@@ -257,9 +258,9 @@ export default class Renderer {
 
   // Convert bulk forecast data, to data grouped by day
   private convertForecastData(forecast: Array<ForecastListItem>): Array<Array<ForecastListItem>> {
-    let data = [];
-    let arr = [];
-    let prev = null;
+    let data: any = [];
+    let arr: any = [];
+    let prev: any = null;
 
     forecast.forEach((t, i) => {
       if (!prev) {

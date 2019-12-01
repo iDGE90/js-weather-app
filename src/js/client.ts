@@ -36,19 +36,19 @@ export default class Client {
     return this.getUrl(`find?lat=${lat}&lon=${lon}&cnt=${cnt}`);
   }
 
-  getLocationByIdUrl(id) {
+  getLocationByIdUrl(id: string): string {
     return this.getUrl(`weather?id=${id}`);
   }
   
-  getForecastUrl(id) {
+  getForecastUrl(id: string): string {
     return this.getUrl(`forecast?id=${id}`);
   }
 
-  getImageUrl(icon, double = false) {
+  getImageUrl(icon: string, double = false): string {
     return this.imageUri + icon + (double ? '@2x' : '') + '.png';
   }
 
-  getSearchLocationUrl(q) {
+  getSearchLocationUrl(q: string): string {
     return this.getUrl(`find?q=${q}&type=like`);
   }
 

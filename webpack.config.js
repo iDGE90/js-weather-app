@@ -20,7 +20,7 @@ module.exports = {
   },
 
   optimization: {
-    // minimize: false
+    minimize: false
   },
 
   // devtool: 'inline-source-map',
@@ -43,6 +43,18 @@ module.exports = {
     rules: [
       {
         test: /\.ts$/,
+        exclude: /node_modules/,
+        use: [
+          {
+            loader: 'babel-loader'
+          },
+          {
+            loader: 'ts-loader'
+          }
+        ],
+      },
+      {
+        test: /\.js$/,
         exclude: /node_modules/,
         use: [
           {
